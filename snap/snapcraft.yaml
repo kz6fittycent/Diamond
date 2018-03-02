@@ -1,0 +1,27 @@
+name: diamond # check to see if it's available
+version: '0.1+git' # this is freakin' awesome
+summary: Diamond is a python daemon that gets metrics and publishes to Graphite # 79 char long summary
+description: |
+  Diamond is a python daemon that collects system metrics and publishes them to Graphite (and others). It is capable of collecting cpu, memory, network, i/o, load and disk metrics. Additionally, it features an API for implementing custom collectors for gathering metrics from almost any source.
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs
+
+apps:
+  diamond:
+    command: diamond
+    plugs:
+      - home
+      - network
+      - network-bind
+     
+parts: 
+  my-part:
+    source: https://github.com/kz6fittycent/Diamond
+    source-type: git
+    plugin: python3
+    
+    build-packages:
+      - python3
+      
+    stage-packages:
+      - python3
